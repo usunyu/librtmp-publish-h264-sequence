@@ -13,3 +13,17 @@ for (int i = 1; i <= VIDEO_COUNT; i++)
     lib->close();
 }
 ```
+
+#### Attemp 2: Try use namedpipe to send h264 to ffmpeg and publish.
+```
+LibFFmpeg* lib = new LibFFmpeg(rtmp_url, "ffmpeg.exe");
+for (int i = 1; i <= VIDEO_COUNT; i++)
+{
+    std::string video_file = "h264/" + std::to_string(i) + ".h264";
+    int size = get_file_size2(video_file.c_str());
+    std::cout << "Start to publish " << video_file << ": " << size << " bytes" << "..." << std::endl;
+    unsigned char* data = read_file_to_array2(video_file.c_str(), size);
+    lib->WriteFrame(data, size);
+}
+lib->Close();
+```
