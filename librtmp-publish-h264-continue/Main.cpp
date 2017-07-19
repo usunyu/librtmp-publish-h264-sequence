@@ -21,6 +21,8 @@ TCHAR* string_to_tchar(std::string str)
 
 int main()
 {
+    // Attemp 1: Try use librtmp to publish h264 list in a loop.
+    // Require reconnect when process the new file.
     LibRTMP* lib = new LibRTMP();
     for (int i = 1; i <= VIDEO_COUNT; i++)
     {
