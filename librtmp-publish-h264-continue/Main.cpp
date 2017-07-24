@@ -9,7 +9,8 @@
 #include <string>
 
 //TCHAR* rtmp_url = TEXT("rtmp://txy.live-send.acg.tv/live-txy/?streamname=live_6235300_5849362&key=10fc91777ea6f60a940ab13fab01c7f5");
-char* rtmp_url = "rtmp://txy.live-send.acg.tv/live-txy/?streamname=live_6235300_5849362&key=10fc91777ea6f60a940ab13fab01c7f5";
+//char* rtmp_url = "rtmp://txy.live-send.acg.tv/live-txy/?streamname=live_6235300_5849362&key=10fc91777ea6f60a940ab13fab01c7f5";
+char* rtmp_url = "rtmp://a.rtmp.youtube.com/live2/jtqt-q68e-fycp-02a1";
 int VIDEO_COUNT = 20;
 
 TCHAR* string_to_tchar(std::string str)
@@ -107,15 +108,18 @@ int main()
 
     // Attemp 2: Try use namedpipe to send h264 to ffmpeg and publish.
     LibFFmpeg* lib = new LibFFmpeg(rtmp_url, "ffmpeg.exe");
-    for (int i = 1; i <= VIDEO_COUNT; i++)
+    for (int j = 0; j < 100; j++)
     {
-        std::string video_file = "h264/" + std::to_string(i) + ".h264";
-        //int size = get_file_size(video_file);
-        int size = get_file_size2(video_file.c_str());
-        std::cout << "Start to publish " << video_file << ": " << size << " bytes" << "..." << std::endl;
-        //char* data = read_file_to_array(video_file, size);
-        unsigned char* data = read_file_to_array2(video_file.c_str(), size);
-        lib->WriteFrame(data, size);
+        for (int i = 1; i <= VIDEO_COUNT; i++)
+        {
+            std::string video_file = "h264/" + std::to_string(i) + ".h264";
+            //int size = get_file_size(video_file);
+            int size = get_file_size2(video_file.c_str());
+            std::cout << "Start to publish " << video_file << ": " << size << " bytes" << "..." << std::endl;
+            //char* data = read_file_to_array(video_file, size);
+            unsigned char* data = read_file_to_array2(video_file.c_str(), size);
+            lib->WriteFrame(data, size);
+        }
     }
     lib->Close();
 
