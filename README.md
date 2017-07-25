@@ -14,7 +14,7 @@ for (int i = 1; i <= VIDEO_COUNT; i++)
 }
 ```
 
-#### Attemp 2: Try use namedpipe to send h264 to ffmpeg and publish.
+#### Attemp 2: Try use pipe to send h264 to ffmpeg and publish.
 ```
 LibFFmpeg* lib = new LibFFmpeg(rtmp_url, "ffmpeg.exe");
 for (int i = 1; i <= VIDEO_COUNT; i++)
